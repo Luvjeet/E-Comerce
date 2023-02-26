@@ -35,6 +35,8 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "fulfilled";
+        state.message = "Success";
+        localStorage.setItem("accessTokens", JSON.stringify(action.payload));
         const decoded = jwt_decode(action.payload.access);
         state.username = decoded.username;
         state.accessToken = action.payload.access;
