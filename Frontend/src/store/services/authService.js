@@ -7,7 +7,7 @@ const loginUser = async (data) => {
     `${import.meta.env.VITE_BASE_URL}${LOGIN_USER}`,
     data
   );
-  console.log(resp);
+  return resp.data;
 };
 
 const authServices = {

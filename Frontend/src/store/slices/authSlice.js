@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authServices from "../services/authService";
+import jwt_decode from "jwt-decode";
 
 const initialState = {
-  userExists: false,
+  username: "",
   accessToken: null,
   status: "loading",
   message: "",
@@ -32,8 +33,11 @@ const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.status = "pending";
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "fulfilled";
+        const decoded = jwt_decode(action.payload.access);
+        state.username = decoded.username;
+        state.accessToken = action.payload.access;
       })
       .addCase(loginUser.rejected, (state) => {
         state.status = "rejected";

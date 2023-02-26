@@ -34,10 +34,10 @@ const Login = () => {
             <AiOutlineUser />
             <input
               name="username"
-              type="email"
+              type="text"
               autoComplete="off"
               className="outline-none ml-2 autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] text-xl"
-              placeholder="Email"
+              placeholder="Username"
             />
           </div>
           <div className="flex text-xl items-center m-2 border-2 border-[#121212] rounded p-2">
