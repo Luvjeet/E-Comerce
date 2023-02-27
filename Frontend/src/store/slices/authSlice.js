@@ -6,6 +6,7 @@ const initialState = {
   username: "",
   accessToken: null,
   status: "loading",
+  authCompleted: false,
   message: "",
 };
 
@@ -27,7 +28,19 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    getUser: (state, action) => {
+      const decoded = jwt_decode(action.payload.access);
+      state.username = decoded.username;
+      state.accessToken = decoded.access;
+      state.authCompleted = true;
+      state.status = "fulfilled";
+    },
+    logout: (state) => {
+      Object.assign(state, initialState);
+      localStorage.removeItem("accessTokens");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -35,11 +48,11 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        state.message = "Success";
         localStorage.setItem("accessTokens", JSON.stringify(action.payload));
         const decoded = jwt_decode(action.payload.access);
         state.username = decoded.username;
         state.accessToken = action.payload.access;
+        state.authCompleted = true;
       })
       .addCase(loginUser.rejected, (state) => {
         state.status = "rejected";
@@ -47,6 +60,6 @@ const authSlice = createSlice({
   },
 });
 
-export const authAction = authSlice.actions;
+export const { getUser, logout } = authSlice.actions;
 
 export default authSlice.reducer;

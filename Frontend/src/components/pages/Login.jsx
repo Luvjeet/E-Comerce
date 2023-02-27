@@ -5,10 +5,12 @@ import Button from "../common/Button";
 import { loginUser } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import useToggle from "../../custom/useToggle";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // Variables
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useToggle(false);
 
   // Functions
@@ -18,7 +20,7 @@ const Login = () => {
       username: e.target.username.value,
       password: e.target.password.value,
     };
-    const resp = dispatch(loginUser(data));
+    dispatch(loginUser(data)).then(() => navigate("/"));
   };
 
   return (

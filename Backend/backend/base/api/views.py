@@ -5,6 +5,9 @@ from rest_framework.decorators import api_view
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView 
 
+from .serializers import ProductSerializer
+from base.models import Product 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 	@classmethod
 	def get_token(cls, user):
@@ -28,3 +31,9 @@ def getRoutes(request):
 	]
 
 	return Response(routes)
+
+@api_view(['GET'])
+def getProducts(request):
+	products = Product.objects.all()
+	serializer = ProductSerializer(products, many=True)
+	return Response(serializer.data)
