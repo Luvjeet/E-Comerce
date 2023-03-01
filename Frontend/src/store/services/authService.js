@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const LOGIN_USER = "api/token/";
+const LOGIN_USER = "/api/token/";
 
 const loginUser = async (data) => {
   const resp = await axios.post(

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GET_ALL_PRODUCTS = "api/products/";
+const GET_ALL_PRODUCTS = "/api/products/";
 
 const getProducts = async () => {
   const resp = await axios.get(

@@ -3,10 +3,11 @@ import authServices from "../services/authService";
 import jwt_decode from "jwt-decode";
 
 const initialState = {
-  username: "",
+  username: null,
   accessToken: null,
   status: "loading",
-  authCompleted: false,
+  userId: null,
+  authCompleted: null,
   message: "",
 };
 
@@ -32,6 +33,7 @@ const authSlice = createSlice({
     getUser: (state, action) => {
       const decoded = jwt_decode(action.payload.access);
       state.username = decoded.username;
+      state.userId = decoded.user_id;
       state.accessToken = decoded.access;
       state.authCompleted = true;
       state.status = "fulfilled";
@@ -50,6 +52,8 @@ const authSlice = createSlice({
         state.status = "fulfilled";
         localStorage.setItem("accessTokens", JSON.stringify(action.payload));
         const decoded = jwt_decode(action.payload.access);
+        console.log(decoded);
+        state.userId = decoded.user_id;
         state.username = decoded.username;
         state.accessToken = action.payload.access;
         state.authCompleted = true;

@@ -10,3 +10,14 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.productName
+
+
+class Cart(models.Model):
+	created = models.DateTimeField(auto_now_add=True)
+	total = models.PositiveIntegerField(default=1)
+
+
+	def __str__(self):
+		return "Cart: " + self.id
+
+
