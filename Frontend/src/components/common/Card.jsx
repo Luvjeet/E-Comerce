@@ -13,7 +13,7 @@ const Card = ({ image, name, desc, price, category }) => {
   };
 
   return (
-    <CardLayout className="border ">
+    <CardLayout className="rounded-xl">
       <figure className="h-56 w-auto mb-6">
         <img
           src={`${import.meta.env.VITE_BASE_URL}${image}`}
@@ -25,7 +25,7 @@ const Card = ({ image, name, desc, price, category }) => {
         <div className="flex justify-between text-xl mb-3">
           <p>{name}</p>
           <Button
-            text="Add to Cart"
+            text="Buy Now"
             className="px-3 py-1 text-sm"
             handler={userLogged}
           />

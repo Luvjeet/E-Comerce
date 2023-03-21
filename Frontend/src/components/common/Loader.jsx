@@ -2,7 +2,7 @@ import "./Loader.css";
 
 const Loader = () => {
   return (
-    <div className="h-screen w-screen flex items-center justify-center ">
+    <div className="h-screen w-screen flex items-center justify-between ">
       <section id="global">
         <div id="top" className="mask">
           <div className="plane"></div>

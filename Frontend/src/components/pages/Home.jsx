@@ -7,8 +7,8 @@ const Home = () => {
   const allProducts = useSelector((state) => state.products?.allProducts);
 
   return (
-    <div className="p-12">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-8">
+    // <div className="py-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 px-6 py-16">
         {allProducts?.map((product) => (
           <Card
             name={product.productName}
@@ -20,7 +20,7 @@ const Home = () => {
           />
         ))}
       </div>
-    </div>
+    // </div>
   );
 };
 
