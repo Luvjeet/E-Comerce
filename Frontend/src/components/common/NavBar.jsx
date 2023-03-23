@@ -22,10 +22,10 @@ const NavBar = () => {
 
   return (
     <nav className="bg-[#121212] h-12 w-full fixed flex justify-between p-2 px-4">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center md:hidden">
         <HiBars3BottomLeft className={`${sidebar ? "text-black" : "text-white"} text-2xl z-20`} onClick={() => sidebarToggle()} />
       </div>
-      <ul className="hidden md:flex justify-center gap-10 text-white text-xl flex-[0.6]">
+      <ul className="hidden md:flex justify-center items-center gap-20 text-white text-xl">
         <li className="p-2">
           <NavLink to="/">Home</NavLink>
         </li>

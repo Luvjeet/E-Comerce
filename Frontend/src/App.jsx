@@ -8,8 +8,9 @@ import { getProducts } from "./store/slices/productSlice";
 import Layout from "./components/layouts/Layout";
 import Loader from "./components/common/Loader";
 
-const Home = lazy(() => import("./components/pages/Home"));
-const Login = lazy(() => import("./components/pages/Login"));
+const Home = lazy(() => import("./components/pages/Home"))
+const Login = lazy(() => import("./components/pages/Login"))
+const ItemPage = lazy(() => import("./components/pages/ItemPage"))
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/item/:slug/:id" element={<ItemPage />} />
         </Routes>
       </Layout>
     </Suspense>
