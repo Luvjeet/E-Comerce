@@ -21,7 +21,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-[#121212] h-12 w-full fixed flex justify-between p-2 px-4">
+    <nav className="bg-[#121212] h-12 w-full flex justify-between p-2 px-4">
       <div className="flex items-center justify-center md:hidden">
         <HiBars3BottomLeft className={`${sidebar ? "text-black" : "text-white"} text-2xl z-20`} onClick={() => sidebarToggle()} />
       </div>
