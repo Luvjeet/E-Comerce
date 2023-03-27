@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import {toast}from "react-toastify"
+import { toast } from "react-toastify"
 import Button from "../common/Button"
 import axios from "axios"
 
 const ItemPage = () => {
   const params = useParams()
-  const [item,setItem] = useState([])
+  const [item, setItem] = useState([])
 
   const getProduct = useCallback(async () => {
     const resp = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/getItem/${params.id}`)
-    if(resp.status===200) setItem(resp.data)
+    if (resp.status === 200) setItem(resp.data)
     else toast("Something went wrong")
   }, [])
 
