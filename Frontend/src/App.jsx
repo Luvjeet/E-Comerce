@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import { getUser } from "./store/slices/authSlice";
+    import { getUser } from "./store/slices/authSlice";
 import { getProducts } from "./store/slices/productSlice";
 import cookieService from "./utils/cookie"
 

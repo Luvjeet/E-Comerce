@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa"
 import { useSelector, useDispatch } from "react-redux"
 import { NavLink, Link } from "react-router-dom"
 import { logout } from "../../store/slices/authSlice"
+import { clearCart } from "../../store/slices/cartSlice"
 import { HiBars3BottomLeft } from 'react-icons/hi2'
 
 const NavBar = () => {
@@ -12,6 +13,7 @@ const NavBar = () => {
   const [sidebar, setSidebar] = useState(false)
 
   const logOutUser = () => {
+    dispatch(clearCart())
     dispatch(logout());
   };
 
@@ -48,7 +50,7 @@ const NavBar = () => {
       </ul>
       <div className="flex items-center justify-center ">
         <div className="flex gap-10 items-center ">
-          <div data-count={cart.totalItems ? `${cart.totalItems}` : "0"} className={`text-white text-xl before:content-[attr(data-count)] before:absolute before:top-[5px] before:right-[5px]  before:w-[16px] before:h-[16px] before:flex before:justify-center before:items-center before:rounded-[50%] before:bg-red-500 before:text-white before:text-xs`} >
+          <div data-count={cart.totalItems ? `${cart.totalItems}` : "0"} className={`text-white text-xl relative before:content-[attr(data-count)] before:absolute before:-top-2 before:-right-3  before:w-[16px] before:h-[16px] before:flex before:justify-center before:items-center before:rounded-[50%] before:bg-red-500 before:text-white before:text-xs`} >
             <Link to="/checkout">
               <FaShoppingCart />
             </Link>
