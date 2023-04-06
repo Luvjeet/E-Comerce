@@ -1,12 +1,13 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView 
 
-from .serializers import ProductSerializer
-from base.models import Product 
+from .serializers import ProductSerializer, CartSerializer
+from base.models import Product, Cart 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 	@classmethod
@@ -43,3 +44,11 @@ def getItem(request, id):
 	product = Product.objects.get(id=id)
 	serializer = ProductSerializer(product, many=False)
 	return Response(serializer.data)
+
+@api_view(['GET','POST'])
+def cart(request):
+	serializer = CartSerializer(data=request.data)
+	if serializer.is_valid():
+		serializer.save()
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

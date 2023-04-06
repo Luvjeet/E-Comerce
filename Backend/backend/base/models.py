@@ -23,11 +23,17 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
+	customer = models.ForeignKey(Customer, on_delete=models.CASCADE,null=True,)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
+	quantity = models.PositiveIntegerField(default=1)
 	created = models.DateTimeField(auto_now_add=True)
-	total = models.PositiveIntegerField(default=1)
 
 	def __str__(self):
 		return "Cart: " + self.id
+	
+	@property
+	def total_price(self):
+		return self.product*self.quantity
 
 
 class Order(models.Model):
