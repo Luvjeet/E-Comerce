@@ -28,7 +28,7 @@ const CartCard = ({ name, price, image, id, category, desc }) => {
                         >
                             {Array.from({ length: 10 }, (_, i) => i + 1)
                                 .map((e) => (
-                                    <option vlaue={e} className="!border-0 !mx-2 !my-1 ">
+                                    <option key={e} vlaue={e} className="!border-0 !mx-2 !my-1 ">
                                         {e}
                                     </option>
                                 ))}

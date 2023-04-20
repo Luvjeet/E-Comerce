@@ -23,21 +23,37 @@ class Product(models.Model):
 
 
 class Cart(models.Model):
-	customer = models.ForeignKey(Customer, on_delete=models.CASCADE,null=True,)
-	product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
-	quantity = models.PositiveIntegerField(default=1)
+	user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,)
+	products = models.ManyToManyField(Product, blank=True)
+	quantities = models.JSONField(default=list)
 	created = models.DateTimeField(auto_now_add=True)
+	total_price=models.PositiveIntegerField(null=True)
 
 	def __str__(self):
-		return "Cart: " + self.id
+		return str(self.user)
 	
-	@property
-	def total_price(self):
-		return self.product*self.quantity
+	def totalAmount(self,price,quantity):
+		self.total_price += quantity*price
+
+	def add_product(self, product, quantity):
+	    if product not in self.products.all():
+	        self.products.add(product)
+	        self.quantities.append(quantity)
+	    else:
+	        index = list(self.products.all()).index(product)
+	        self.quantities[index] += quantity
+	    self.save()
+
+	def remove_product(self, product):
+	    if product in self.products.all():
+	        index = list(self.products.all()).index(product)
+	        self.products.remove(product)
+	        del self.quantities[index]
+	        self.save()
 
 
 class Order(models.Model):
-	customer=models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True,null=True)
+	user=models.ForeignKey(User,on_delete=models.SET_NULL, blank=True,null=True)
 	dateOrder = models.DateTimeField(auto_now_add=True)
 	compeleted = models.BooleanField(default=False, null=True, blank=False)
 	transactionId = models.CharField(max_length=200, null=True)
